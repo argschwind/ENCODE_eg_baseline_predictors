@@ -1,0 +1,24 @@
+name: encode_simple_predictors
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - python=3.9.5
+  - curl
+  - requests=2.25.1
+  - pandas=1.2.4
+  - pyyaml=5.4.1
+  - samtools=1.12
+  - macs2=2.2.7.1
+  - bedtools=2.30.0
+  - r-base=4.1.1
+  - r-data.table=1.14.2
+  - r-r.utils=2.11.0
+  - r-tidyverse=1.3.1
+  - r-multidplyr=0.1.0
+  - bioconductor-genomicranges=1.44.0
+  - bioconductor-rtracklayer=1.52.0
+  - bioconductor-biocparallel=1.26.0
+ 
