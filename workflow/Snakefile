@@ -3,7 +3,7 @@
 configfile: "config/config.yml"
 
 # load rules
-include: "rules/create_dhs_baseline_predictors.smk"
+include: "rules/create_baseline_predictors.smk"
 
 # add ABC sample files to config object
 include: "scripts/add_samples_to_config.py"
@@ -11,18 +11,28 @@ include: "scripts/add_samples_to_config.py"
 # compute all DHS baseline predictors
 rule dhs_baseline_predictors:
   input:
-    expand("results/DHS/{sample}/{pred}.tsv.gz",
+    expand("results/dhs/{sample}/{pred}.tsv.gz",
       sample = config["samples"],
       pred = ["dist_to_tss", "dist_to_gene", "within_100kb_of_tss", "within_100kb_of_gene",
-      "nearest_tss", "nearest_gene", "DHS_reads_by_dist_to_tss", "DHS_reads_by_dist_to_tss_norm",
-      "H3K27ac_reads_by_dist_to_tss", "H3K27ac_reads_by_dist_to_tss_norm"])
+        "nearest_tss", "nearest_gene", "DHS_reads_by_dist_to_tss", "DHS_reads_by_dist_to_tss_norm",
+        "H3K27ac_reads_by_dist_to_tss", "H3K27ac_reads_by_dist_to_tss_norm"])
       
 # compute any 'nearest expressed' predictors
 rule dhs_nearest_expressed_baseline_predictors:
   input:
-    expand("results/DHS/{sample}/{pred}.tsv.gz",
+    expand("results/dhs/{sample}/{pred}.tsv.gz",
       sample = config["abc_samples"],
       pred = ["nearest_expressed_tss", "nearest_expressed_gene"])
+      
+# compute all ABC baseline predictors
+rule abc_baseline_predictors:
+  input:
+    expand("results/abc/{sample}/{pred}.tsv.gz",
+      sample = config["abc_samples"],
+      pred = ["dist_to_tss", "dist_to_gene", "within_100kb_of_tss", "within_100kb_of_gene",
+        "nearest_tss", "nearest_gene", "nearest_expressed_tss", "nearest_expressed_gene",
+        "DHS_reads_by_dist_to_tss", "DHS_reads_by_dist_to_tss_norm", "H3K27ac_reads_by_dist_to_tss",
+        "H3K27ac_reads_by_dist_to_tss_norm"])
 
 # rule make_aggregate_predictors:
 # 	input:

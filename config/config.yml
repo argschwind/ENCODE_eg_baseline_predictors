@@ -1,7 +1,6 @@
 
 # lookup table containing read files for ABC biosamples
 sample_files: "resources/ENCODE_lookup.combined.unique.scratch.abc.tsv"
-# sample_files: "/oak/stanford/groups/akundaje/kmualim/BenchmarkingPipeline_resources/metadata/ENCODE_lookup.combined.unique.tsv"
 
 # gene and TSS annotation files
 annot:
@@ -12,15 +11,22 @@ annot:
   regular_chrs: "resources/genome_annotations/GRCh38_regular_chroms.bed"
 
 # samples for which ABC files exist to compute nearest expressed TSS/gene
-abc_samples: ["A673_ID_2649", "AG04450_ID_361", "bipolar_neuron_ID_2650", "cardiac_muscle_cell_ID_363",
-              "CD14-positive_monocyte_ID_370", "colonic_mucosa_ID_2118", "coronary_artery_ID_2664",
-              "epithelial_cell_of_prostate_ID_2659", "fibroblast_of_dermis_ID_2639", "GM12878_ID_2724",
-              "GM23338_ID_2088", "H1_ID_364", "H9_ID_413", "HCT116_ID_2645", "HeLa-S3_ID_389",
-              "HL-60_ID_359", "IMR-90_ID_2627", "iPS_DF_19.11_ID_2663", "iPS_DF_6.9_ID_2647",
-              "K562_ID_2644", "Karpas-422_ID_2661", "keratinocyte_ID_2339",
-              "left_ventricle_myocardium_inferior_ID_2378", "liver_ID_411", "lower_lobe_of_left_lung_ID_55",
-              "mesenchymal_stem_cell_ID_2749", "mesendoderm_ID_2640", "middle_frontal_area_46_ID_414",
-              "MM.1S_ID_2179", "myotube_ID_2176", "NCI-H929_ID_2604", "neuronal_stem_cell_ID_2716",
-              "osteoblast_ID_2177", "Panc1_ID_2630", "right_atrium_auricular_region_ID_2728",
-              "RWPE2_ID_2121", "skeletal_muscle_myoblast_ID_2714", "tibial_nerve_ID_2180",
-              "uterus_ID_2745", "WERI-Rb-1_ID_2137"]
+abc_samples: ["A673_ID_2649", "AG04450_ID_361", "aorta_ID_2340", "bipolar_neuron_ID_2650",
+  "brain_microvascular_endothelial_cell_ID_2308", "cardiac_muscle_cell_ID_363",
+  "CD14-positive_monocyte_ID_370", "colonic_mucosa_ID_2118", "coronary_artery_ID_2664",
+  "epithelial_cell_of_prostate_ID_2659", "fibroblast_of_dermis_ID_2639", "GM12878_ID_2724",
+  "H1_ID_364", "H9_ID_413", "HAP-1_ID_2606", "HCT116_ID_2645", "HeLa-S3_ID_389",
+  "hepatocyte_ID_2623", "HL-60_ID_359", "IMR-90_ID_2627", "iPS_DF_19.11_ID_2663",
+  "iPS_DF_6.9_ID_2647", "K562_ID_2644", "Karpas-422_ID_2661", "keratinocyte_ID_2339",
+  "left_ventricle_myocardium_inferior_ID_2378", "liver_ID_411", "lower_lobe_of_left_lung_ID_55",
+  "mammary_epithelial_cell_ID_2625", "MCF-7_ID_353", "mesenchymal_stem_cell_ID_2749",
+  "mesendoderm_ID_2640", "middle_frontal_area_46_ID_414", "MM.1S_ID_2179",
+  "muscle_of_trunk_ID_2601", "myotube_ID_2176", "natural_killer_cell_ID_2608", "NCI-H929_ID_2604",
+  "neuronal_stem_cell_ID_2716", "osteoblast_ID_2177", "ovary_ID_325", "Panc1_ID_2630",
+  "prostate_gland_ID_2763", "right_atrium_auricular_region_ID_2728", "RWPE2_ID_2121",
+  "sigmoid_colon_ID_2752", "SJCRH30_ID_2119", "SJSA1_ID_368", "skeletal_muscle_myoblast_ID_2714",
+  "thoracic_aorta_ID_2344", "thymus_ID_2379", "thyroid_gland_ID_2682", "tibial_nerve_ID_2180",
+  "transverse_colon_ID_2733", "trophoblast_cell_ID_2596", "upper_lobe_of_left_lung_ID_2310",
+  "uterus_ID_2745", "WERI-Rb-1_ID_2137"]
+  
+  
