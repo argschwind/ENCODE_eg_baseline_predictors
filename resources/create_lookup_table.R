@@ -2,9 +2,10 @@
 
 # required packages
 library(tidyverse)
+library(here)
 
 # lookup table for baseline predictors
-lookup <- read_tsv("resources/ENCODE_lookup.combined.unique.scratch.tsv")
+lookup <- read_tsv(here("resources/ENCODE_lookup.combined.unique.scratch.tsv"))
 
 # DNase + H3K27ac AB samples
 abc <- read_tsv("resources/H3K27ac_DNase_qc_samples.tsv",
@@ -76,4 +77,4 @@ output <- output %>%
   replace_na(replace = list(ABC_sample = "none", ABC_file = "none"))
 
 # save output to file
-write_tsv(output, file = "resources/ENCODE_lookup.combined.unique.scratch.abc.tsv")
+write_tsv(output, file = here("resources/ENCODE_lookup.combined.unique.scratch.abc.tsv"))
