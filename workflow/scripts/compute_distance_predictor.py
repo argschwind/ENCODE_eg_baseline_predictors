@@ -12,8 +12,8 @@ def is_gzipped(path):
   
 # helper function to print header
 def print_header():
-  colnames = ['chr', 'start', 'end', 'name', 'class', 'TargetGene', 'TargetGeneEnsemblID', 
-    'TargetGeneTSS', 'CellType', 'Score', 'DistanceToTSS']
+  colnames = ['#chr', 'start', 'end', 'name', 'class', 'TargetGene', 'TargetGeneEnsemblID', 
+    'TargetGeneTSS', 'CellType', 'Score']
   print('\t'.join(colnames))
 
 # function to process one line in the input and compute distance to TSS and feature for that pair
@@ -26,7 +26,7 @@ def get_distance(line, cell_type, dist_index):
   score = entry[dist_index]
   
   # create and return output entry
-  output = entry[0:4] + ['NA'] + [entry[9]] + ['NA'] + [entry[12]] + [cell_type] + [score] + [entry[13]]
+  output = entry[0:4] + ['NA'] + [entry[9]] + ['NA'] + [entry[12]] + [cell_type] + [score]
   return output
 
 # execute if run as main program -------------------------------------------------------------------

@@ -4,56 +4,25 @@ configfile: "config/config.yml"
 
 # load rules
 include: "rules/create_baseline_predictors.smk"
+include: "rules/copy_baseline_predictors_to_oak.smk"
 
 # add ABC sample files to config object
 include: "scripts/add_samples_to_config.py"
 
-# compute all DHS baseline predictors
-rule dhs_baseline_predictors:
+# compute all baseline predictors
+rule all:
   input:
-    expand("results/dhs/{sample}/{pred}.tsv.gz",
-      sample = config["samples"],
-      pred = ["dist_to_tss", "dist_to_gene", "within_100kb_of_tss", "within_100kb_of_gene",
-        "nearest_tss", "nearest_gene", "DHS_reads_by_dist_to_tss", "DHS_reads_by_dist_to_tss_norm",
-        "H3K27ac_reads_by_dist_to_tss", "H3K27ac_reads_by_dist_to_tss_norm"])
-      
-# compute any 'nearest expressed' predictors
-rule dhs_nearest_expressed_baseline_predictors:
-  input:
-    expand("results/dhs/{sample}/{pred}.tsv.gz",
-      sample = config["abc_samples"],
-      pred = ["nearest_expressed_tss", "nearest_expressed_gene"])
-      
-# compute all ABC baseline predictors
-rule abc_baseline_predictors:
-  input:
-    expand("results/abc/{sample}/{pred}.tsv.gz",
-      sample = config["abc_samples"],
-      pred = ["dist_to_tss", "dist_to_gene", "within_100kb_of_tss", "within_100kb_of_gene",
-        "nearest_tss", "nearest_gene", "nearest_expressed_tss", "nearest_expressed_gene",
-        "DHS_reads_by_dist_to_tss", "DHS_reads_by_dist_to_tss_norm", "H3K27ac_reads_by_dist_to_tss",
-        "H3K27ac_reads_by_dist_to_tss_norm"])
-
-# rule make_aggregate_predictors:
-# 	input:
-# 		predList = expand("results/predictors/{sample}/{{type}}.tsv.gz", sample=config['samples'])
-# 	params:
-# 		out_dir = "results/aggregate_predictors",
-# 		predList_unzipped = expand("results/predictors/{sample}/{{type}}.tsv", sample=config['samples'])
-# 	output:
-# 		out_files = "results/aggregate_predictors/{type}.tsv.gz"
-# 	conda: "../envs/encode_simple_predictors.yml"
-# 	shell:
-# 		"""
-# 		set +o pipefail;
-# 
-# 		for sample in {params.predList_unzipped}
-# 		do
-# 			zcat ${{sample}}.gz > $sample
-# 		done
-# 		
-# 		awk 'NR == 1 {{print}} FNR == 1 {{next}} {{print}}' {params.predList_unzipped} | gzip > {output.out_files}
-# 		
-# 		rm {params.predList_unzipped}
-# 		
-# 		"""
+    expand("{outdir}/{sample}/{peaks}/{pred}.tsv.gz", peaks = ["dhs"], sample = config["samples"],
+           outdir = config["outdir"], pred = ["dist_to_tss", "nearest_expressed_gene"]),
+    expand("{outdir}/{sample}/{peaks}/{pred}.tsv.gz", peaks = ["dhs", "abc"],
+           sample = config["dnase_pred_samples"] + config["h3ka7ac_pred_samples"],
+           outdir = config["outdir"],
+           pred = ["dist_to_tss", "dist_to_gene", "within_100kb_of_tss", "within_100kb_of_gene",
+                   "within_100kb_of_expressed_tss", "within_100kb_of_expressed_gene", "nearest_tss",
+                   "nearest_gene", "nearest_expressed_tss", "nearest_expressed_gene"]),
+    expand("{outdir}/{sample}/{peaks}/DHS_reads_by_dist_to_{annot}{ext}",
+           sample = config["dnase_pred_samples"], outdir = config["outdir"], peaks = ["dhs", "abc"],
+           annot = ["tss", "gene"], ext = [".tsv.gz", "_norm.tsv.gz"]),
+    expand("{outdir}/{sample}/{peaks}/H3K27ac_reads_by_dist_to_{annot}{ext}",
+           sample = config["h3ka7ac_pred_samples"], outdir = config["outdir"], peaks = ["dhs", "abc"],
+           annot = ["tss", "gene"], ext = [".tsv.gz", "_norm.tsv.gz"])       

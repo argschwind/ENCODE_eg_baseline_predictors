@@ -12,8 +12,8 @@ def is_gzipped(path):
   
 # helper function to print header
 def print_header():
-  colnames = ['chr', 'start', 'end', 'name', 'class', 'TargetGene', 'TargetGeneEnsemblID', 
-    'TargetGeneTSS', 'CellType', 'Score', 'DistanceToTSS']
+  colnames = ['#chr', 'start', 'end', 'name', 'class', 'TargetGene', 'TargetGeneEnsemblID', 
+    'TargetGeneTSS', 'CellType', 'Score']
   print('\t'.join(colnames))
 
 # function to process one line in the input and compute distance to TSS and feature for that pair
@@ -27,7 +27,7 @@ def compute_nearest_pred(line, cell_type):
   score = str(score * 1)
   
   # create and return output entry
-  output = entry[0:4] + ['NA'] + [entry[9]] + ['NA'] + [entry[12]] + [cell_type] + [score] + [entry[13]]
+  output = entry[0:4] + ['NA'] + [entry[9]] + ['NA'] + [entry[12]] + [cell_type] + [score]
   return output
 
 # execute if run as main program -------------------------------------------------------------------
@@ -49,15 +49,24 @@ if __name__ == '__main__':
         print_header()
         for line in f:
           annot_entry = compute_nearest_pred(line, args.cell_type)
-          print('\t'.join(annot_entry))
+          if annot_entry[9] == "1":
+            print('\t'.join(annot_entry))
+          else:
+            pass
     else:
       with open(args.inputfile, 'rt') as f:
         print_header()
         for line in f:
           annot_entry = compute_nearest_pred(line, args.cell_type)
-          print('\t'.join(annot_entry))
+          if annot_entry[9] == "1":
+            print('\t'.join(annot_entry))
+          else:
+            pass
   else:
     print_header()
     for line in sys.stdin:
       annot_entry = compute_nearest_pred(line, args.cell_type)
-      print('\t'.join(annot_entry))
+      if annot_entry[9] == "1":
+        print('\t'.join(annot_entry))
+      else:
+        pass

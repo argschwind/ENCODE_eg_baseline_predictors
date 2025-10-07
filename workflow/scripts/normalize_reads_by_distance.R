@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
 # column types in reads by distance prediction file
 pred_cols <- cols(
   .default = col_double(),
-  chr = col_character(),
+  `#chr` = col_character(),
   name = col_character(),
   class = col_character(),
   TargetGene = col_character(),

@@ -1,4 +1,4 @@
-name: encode_simple_predictors
+name: baseline_predictors
 channels:
   - bioconda
   - conda-forge
